@@ -6,10 +6,11 @@ const DashboardLayout = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       <Topbar />
-      <div className="flex flex-1 mt-16"> {/* Add mt-16 to push the content below the fixed topbar */}
+      <div className="flex flex-1 overflow-hidden mt-16">
         <Sidebar />
-        <main className="flex-1 overflow-auto p-6">
-          <Outlet /> {/* Dynamically rendered pages */}
+
+        <main className="flex-1 overflow-y-auto p-6 h-full scrollbar-hide">
+          <Outlet />
         </main>
       </div>
     </div>

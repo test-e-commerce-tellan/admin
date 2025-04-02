@@ -1,30 +1,58 @@
 import NavigationItem from "./NavigationItem";
-import { FaHome, FaUser, FaCog } from "react-icons/fa";
+import {
+  FiHome,
+  FiTag,
+  FiUsers,
+  FiBarChart2,
+  FiBook,
+  FiBell,
+  FiSettings,
+  FiUser,
+  FiFolder,
+  FiList,
+  FiStar,
+  FiMessageSquare,
+} from "react-icons/fi";
 
 const menuItems = [
-  {
-    name: "Dashboard",
-    path: "/dashboard",
-    icon: <FaHome />,
-    trailingText: "3",
-  },
-  { name: "Profile", path: "/profile", icon: <FaUser />, trailingText: "New" },
-  { name: "Settings", path: "/settings", icon: <FaCog /> },
+  { name: "Dashboard", path: "/dashboard", icon: <FiHome /> },
+  { name: "Orders", path: "/orders", icon: <FiList />, trailingText: "16" },
+  { name: "Products", path: "/products", icon: <FiTag /> },
+  { name: "Categories", path: "/categories", icon: <FiFolder /> },
+  { name: "Customers", path: "/customers", icon: <FiUsers /> },
+  { name: "Reports", path: "/reports", icon: <FiBarChart2 /> },
+  { name: "Coupons", path: "/coupons", icon: <FiStar /> },
+  { name: "Inbox", path: "/inbox", icon: <FiMessageSquare /> },
+  { divider: "Other Information" },
+  { name: "Knowledge Base", path: "/knowledge-base", icon: <FiBook /> },
+  { name: "Product Updates", path: "/product-updates", icon: <FiBell /> },
+  { divider: "Settings" },
+  { name: "Personal Settings", path: "/personal-settings", icon: <FiUser /> },
+  { name: "Global Settings", path: "/global-settings", icon: <FiSettings /> },
 ];
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-gray-900 text-white h-full p-4">
+    <aside className="w-64 bg-gray-900 text-white h-full overflow-y-auto scrollbar-hide p-4">
       <nav className="flex flex-col space-y-2">
-        {menuItems.map(({ name, path, icon, trailingText }) => (
-          <NavigationItem
-            key={path}
-            to={path}
-            icon={icon}
-            text={name}
-            trailingText={trailingText}
-          />
-        ))}
+        {menuItems.map((item, index) =>
+          item.divider ? (
+            <div
+              key={`divider-${index}`}
+              className="text-gray-400 text-xs font-semibold mt-4 mb-2"
+            >
+              {item.divider}
+            </div>
+          ) : (
+            <NavigationItem
+              key={item.path}
+              to={item.path}
+              icon={item.icon}
+              text={item.name}
+              trailingText={item.trailingText}
+            />
+          )
+        )}
       </nav>
     </aside>
   );

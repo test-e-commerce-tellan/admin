@@ -18,19 +18,20 @@ export default function NavigationItem({
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `flex items-center justify-between p-3 rounded ${
+        `flex items-center justify-between p-3 rounded mb-2 ${
           isActive
-            ? "bg-gray-700 text-white"
+            ? "bg-white text-gray-700"
             : "hover:bg-gray-800 text-gray-300"
         }`
       }
     >
-      <div className="flex items-center space-x-3">
-        <span className="text-lg">{icon}</span>
+      <div className="flex items-center space-x-5">
+        {/* Increased spacing between icon and text */}
+        <span className="text-lg pr-4">{icon}</span>
         <span>{text}</span>
       </div>
       {trailingText && (
-        <span className="text-sm text-gray-400">{trailingText}</span>
+        <span className="text-sm font-bold">{trailingText}</span>
       )}
     </NavLink>
   );
