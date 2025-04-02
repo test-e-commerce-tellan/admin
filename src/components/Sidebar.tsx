@@ -15,7 +15,7 @@ import {
 } from "react-icons/fi";
 
 const menuItems = [
-  { name: "Dashboard", path: "/dashboard", icon: <FiHome /> },
+  { name: "Dashboard", path: "/", icon: <FiHome /> },
   { name: "Orders", path: "/orders", icon: <FiList />, trailingText: "16" },
   { name: "Products", path: "/products", icon: <FiTag /> },
   { name: "Categories", path: "/categories", icon: <FiFolder /> },

@@ -1,8 +1,8 @@
-import Home from "../pages/Home";
 import Settings from "../pages/Settings";
 import NotFound from "../pages/NotFound";
 import { RouteObject } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 const routes:  RouteObject[] = [
   {
@@ -11,7 +11,7 @@ const routes:  RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Dashboard />,
       },
       {
         path: "settings",
