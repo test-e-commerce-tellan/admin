@@ -1,9 +1,11 @@
-import { FiSettings, FiDollarSign, FiShoppingCart, FiUsers, FiUserPlus, FiUserCheck } from "react-icons/fi";
+import { FiSettings, FiDollarSign, FiShoppingCart } from "react-icons/fi";
 import StatisticsBox from "./components/StatisticsBox";
+import OrderStatistics from "./components/OrdersStatistics";
+import Last7DaysSales from "./components/Last7DaysSales";
 
 const Dashboard = () => {
   return (
-    <div className="w-full flex flex-col space-y-4 p-2">
+    <div className="w-full flex flex-col space-y-8 p-2">
       <div className="flex justify-between items-center p-4 rounded">
         <h2 className="text-lg font-semibold text-black">Dashboard</h2>
         <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 font-medium">
@@ -12,7 +14,7 @@ const Dashboard = () => {
         </button>
       </div>
 
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between space-x-4">
         <StatisticsBox
           name="Total Revenue"
           value="$50,000"
@@ -34,9 +36,9 @@ const Dashboard = () => {
           isPositive={true}
           icon={
             <img
-            src="/images/chart-yellow.png"
-            alt="Chart Icon"
-            className="w-10 h-10"
+              src="/images/chart-yellow.png"
+              alt="Chart Icon"
+              className="w-10 h-10"
             />
           }
         />
@@ -47,9 +49,9 @@ const Dashboard = () => {
           isPositive={false}
           icon={
             <img
-            src="/images/chart-green.png"
-            alt="Chart Icon"
-            className="w-10 h-10"
+              src="/images/chart-green.png"
+              alt="Chart Icon"
+              className="w-10 h-10"
             />
           }
         />
@@ -60,12 +62,22 @@ const Dashboard = () => {
           isPositive={true}
           icon={
             <img
-            src="/images/chart-blue.png"
-            alt="Chart Icon"
-            className="w-10 h-10"
+              src="/images/chart-blue.png"
+              alt="Chart Icon"
+              className="w-10 h-10"
             />
           }
         />
+      </div>
+
+      <div className="mt-4 flex flex-row gap-4">
+        <div className="w-3/4 mr-4">
+          <OrderStatistics />
+        </div>
+
+        <div className="w-1/4">
+          <Last7DaysSales />
+        </div>
       </div>
     </div>
   );
