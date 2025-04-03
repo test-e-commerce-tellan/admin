@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import { DashboardBackground } from "../constants/Colors";
 
 const DashboardLayout = () => {
   return (
@@ -9,7 +10,8 @@ const DashboardLayout = () => {
       <div className="flex flex-1 overflow-hidden mt-16">
         <Sidebar />
 
-        <main className="flex-1 overflow-y-auto p-6 h-full scrollbar-hide">
+        <main className="flex-1 overflow-y-auto p-6 h-full scrollbar-hide"
+        style={{ backgroundColor: DashboardBackground }}>
           <Outlet />
         </main>
       </div>

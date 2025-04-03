@@ -5,7 +5,7 @@ import { Transaction } from "../types/Transaction";
 import { useEffect, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import { transactionStatusColors } from "../constants/StatusColors";
-import { TextPrimary } from "../constants/Colors";
+import { DataTableStyle, TableHeaderStyle } from "../constants/TableStyles";
 
 const RecentTransactions = () => {
   const [transactions, setTransactions] = useState<Transaction[] | undefined>(
@@ -31,44 +31,28 @@ const RecentTransactions = () => {
         <div className="mt-4">
           <DataTable
             value={transactions}
-            tableStyle={{ minWidth: "5rem", fontSize: "0.875rem" }}
+            tableStyle={{ ...DataTableStyle, minWidth: "5rem" }}
           >
             <Column
               field="name"
               header="Name"
-              headerStyle={{
-                fontWeight: "normal",
-                fontSize: ".75rem",
-                color: TextPrimary,
-              }}
+              headerStyle={TableHeaderStyle}
             ></Column>
             <Column
               field="date"
               header="Date"
-              headerStyle={{
-                fontWeight: "normal",
-                fontSize: ".75rem",
-                color: TextPrimary,
-              }}
+              headerStyle={TableHeaderStyle}
             ></Column>
             <Column
               field="amount"
               header="Amount"
-              headerStyle={{
-                fontWeight: "normal",
-                fontSize: ".75rem",
-                color: TextPrimary,
-              }}
+              headerStyle={TableHeaderStyle}
             ></Column>
             <Column
               field="status"
               header="Status"
               body={statusTemplate}
-              headerStyle={{
-                fontWeight: "normal",
-                fontSize: ".75rem",
-                color: TextPrimary,
-              }}
+              headerStyle={TableHeaderStyle}
             ></Column>
           </DataTable>
         </div>
