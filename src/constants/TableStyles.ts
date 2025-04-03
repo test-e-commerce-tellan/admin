@@ -2,7 +2,7 @@ import { CSSProperties } from "react";
 import { TextPrimary } from "./Colors";
 
 export const DataTableStyle: CSSProperties = {
-  minWidth: "10rem",
+  minWidth: "5rem",
   fontSize: "0.875rem",
 };
 

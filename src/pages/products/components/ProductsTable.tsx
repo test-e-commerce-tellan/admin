@@ -6,6 +6,7 @@ import { Button } from "primereact/button";
 import ProductsTableHeader from "./ProductsTableHeader";
 import StatusBadge from "../../../components/StatusBadge";
 import { inventoryStatusColor } from "../../../constants/StatusColors";
+import { DataTableStyle, TableHeaderStyle } from "../../../constants/TableStyles";
 
 interface ProductsTableProps {
   products: Product[];
@@ -54,7 +55,7 @@ export default function ProductsTable({
         />
 
         <div>
-          <div className="font-medium text-gray-900">{rowData.name}</div>
+          <div className="text-gray-900">{rowData.name}</div>
           <div className="text-sm text-gray-500">{rowData.category}</div>
         </div>
       </div>
@@ -110,11 +111,14 @@ export default function ProductsTable({
           }
           selectionMode="multiple"
           dataKey="name"
+          tableStyle={DataTableStyle}
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+          scrollable
+          scrollHeight="500px"
           globalFilter={globalFilter}
           header={
             <ProductsTableHeader
@@ -132,6 +136,7 @@ export default function ProductsTable({
             header="Product"
             body={imageBodyTemplate}
             style={{ minWidth: "16rem" }}
+            headerStyle={TableHeaderStyle}
           ></Column>
           <Column
             field="totalInventory"
@@ -139,11 +144,13 @@ export default function ProductsTable({
             body={inventoryBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
+            headerStyle={TableHeaderStyle}
           ></Column>
           <Column
             field="color"
             header="Color"
             style={{ minWidth: "8rem" }}
+            headerStyle={TableHeaderStyle}
           ></Column>
           <Column
             field="price"
@@ -151,6 +158,7 @@ export default function ProductsTable({
             body={priceBodyTemplate}
             sortable
             style={{ minWidth: "10rem" }}
+            headerStyle={TableHeaderStyle}
           ></Column>
           <Column
             field="rating"
@@ -158,11 +166,7 @@ export default function ProductsTable({
             body={ratingBodyTemplate}
             sortable
             style={{ minWidth: "10rem" }}
-          ></Column>
-          <Column
-            body={actionBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "12rem" }}
+            headerStyle={TableHeaderStyle}
           ></Column>
         </DataTable>
       </div>
