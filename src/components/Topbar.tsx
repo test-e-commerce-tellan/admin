@@ -1,14 +1,17 @@
 import React from "react";
 import { FiBell, FiMessageSquare, FiSearch } from "react-icons/fi";
+import { TopBarColor } from "../constants/Colors";
 
 const Topbar: React.FC = () => {
   return (
-    <header className="bg-gray-700 text-white shadow-md fixed top-0 left-0 right-0 h-16 flex items-center px-6 z-50">
+    <header
+      className="bg-gray-700 text-white shadow-md fixed top-0 left-0 right-0 h-16 flex items-center px-6 z-50"
+      style={{ backgroundColor: TopBarColor }}
+    >
       <div className="w-64 flex items-center">
         <img src="/images/logo.png" alt="Logo" className="h-10 w-auto" />
       </div>
 
-    
       <div className="flex-1 flex items-center justify-between">
         <FiSearch className="text-xl cursor-pointer" />
         <input
@@ -20,7 +23,7 @@ const Topbar: React.FC = () => {
 
       <div className="flex items-center space-x-6">
         <FiMessageSquare className="text-xl cursor-pointer hover:text-gray-300 mx-2" />
-        
+
         <FiBell className="text-xl cursor-pointer hover:text-gray-300 mx-2" />
         {/* User Dropdown */}
         <div className="relative">

@@ -2,6 +2,8 @@ import { FiSettings, FiDollarSign, FiShoppingCart } from "react-icons/fi";
 import StatisticsBox from "./components/StatisticsBox";
 import OrderStatistics from "./components/OrdersStatistics";
 import Last7DaysSales from "./components/Last7DaysSales";
+import RecentTransactions from "../../components/RecentTransactions";
+import TopProducts from "./components/TopProducts";
 
 const Dashboard = () => {
   return (
@@ -77,6 +79,15 @@ const Dashboard = () => {
 
         <div className="w-1/4">
           <Last7DaysSales />
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-4 mt-4">
+        <div className="w-1/2 mr-4">
+          <RecentTransactions />
+        </div>
+        <div className="w-1/2 mr-4">
+          <TopProducts />
         </div>
       </div>
     </div>
