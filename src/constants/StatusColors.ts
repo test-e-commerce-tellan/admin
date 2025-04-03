@@ -17,3 +17,7 @@ export const paymentStatusColors: StatusColors = {
   Pending: "bg-yellow-500 text-white",
   Failed: "bg-red-500 text-white",
 };
+
+export const inventoryStatusColor: StatusColors = {
+  OutOfStock: "bg-gray-500 text-white",
+};

@@ -4,6 +4,7 @@ import { RouteObject } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Orders from "../pages/orders/Orders";
+import Products from "../pages/products/Products";
 
 const routes:  RouteObject[] = [
   {
@@ -17,6 +18,10 @@ const routes:  RouteObject[] = [
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "products",
+        element: <Products />,
       },
       {
         path: "settings",

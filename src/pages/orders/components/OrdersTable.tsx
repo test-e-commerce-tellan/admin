@@ -92,6 +92,7 @@ const OrdersTable = () => {
         dataKey="orderNumber"
         tableStyle={DataTableStyle}
         selection={selectedOrders}
+        selectionMode="multiple"
         onSelectionChange={(e) => {
           const selected = Array.isArray(e.value) ? e.value : [e.value];
           setSelectedOrders(selected);

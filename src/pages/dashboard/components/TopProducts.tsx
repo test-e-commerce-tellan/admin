@@ -3,7 +3,7 @@ import { Column } from "primereact/column";
 import { TextPrimary } from "../../../constants/Colors";
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/Product";
-import { getTopProductsByUnitsSold } from "../../../service/ProductServide";
+import { getTopProductsByUnitsSold } from "../../../service/ProductService";
 
 const TopProducts = () => {
   const [topProducts, setTopProducts] = useState<Product[] | undefined>(

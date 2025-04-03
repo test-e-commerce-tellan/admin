@@ -125,6 +125,6 @@ export const getAllOrders = async (): Promise<Order[]> => {
           total: 350.0,
         },
       ]);
-    }, 1000);
+    }, 100);
   });
 };
