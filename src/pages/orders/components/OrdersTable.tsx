@@ -86,7 +86,7 @@ const OrdersTable = () => {
   };
 
   return (
-    <div className="bg-white h-full rounded p-4">
+    <div className="bg-white h-full rounded">
       <DataTable
         value={filteredOrders}
         dataKey="orderNumber"
@@ -96,6 +96,11 @@ const OrdersTable = () => {
           const selected = Array.isArray(e.value) ? e.value : [e.value];
           setSelectedOrders(selected);
         }}
+        paginator
+        rows={10}
+        rowsPerPageOptions={[10, 20, 50]}
+        scrollable
+        scrollHeight="400px"
         header={
           <OrdersTableHeader
             searchTerm={searchTerm}
@@ -106,10 +111,7 @@ const OrdersTable = () => {
           />
         }
       >
-        <Column
-          selectionMode="multiple"
-          headerStyle={TableHeaderStyle}
-        />
+        <Column selectionMode="multiple" headerStyle={TableHeaderStyle} />
         <Column field="date" header="Date" headerStyle={TableHeaderStyle} />
         <Column
           field="customerName"
