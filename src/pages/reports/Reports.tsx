@@ -1,6 +1,7 @@
 import { PrimaryButton } from "../../components/Button";
 import { FiDownload } from "react-icons/fi";
 import CustomerGrowth from "./components/CustomerGrowth";
+import CustomerStatistics from "./components/CustomerStatistics";
 
 const Reports = () => {
   const handleDownload = () => {};
@@ -20,6 +21,10 @@ const Reports = () => {
 
       <div className="mt-4">
         <CustomerGrowth />
+      </div>
+
+      <div className="mt-4">
+        <CustomerStatistics />
       </div>
     </div>
   );
