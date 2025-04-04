@@ -55,7 +55,7 @@ const TopProducts = () => {
             <Column
               field="price"
               header="Price"
-              body= {priceTemplate}
+              body={priceTemplate}
               headerStyle={{
                 fontWeight: "normal",
                 fontSize: ".75rem",

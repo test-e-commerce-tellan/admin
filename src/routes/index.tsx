@@ -5,6 +5,7 @@ import DashboardLayout from "../components/DashboardLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Orders from "../pages/orders/Orders";
 import Products from "../pages/products/Products";
+import Reports from "../pages/reports/Reports.jsx"
 
 const routes:  RouteObject[] = [
   {
@@ -22,6 +23,10 @@ const routes:  RouteObject[] = [
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "reports",
+        element: <Reports />,
       },
       {
         path: "settings",

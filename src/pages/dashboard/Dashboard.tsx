@@ -44,6 +44,7 @@ const Dashboard = () => {
             />
           }
         />
+        
         <StatisticsBox
           name="New Users"
           value="500"
