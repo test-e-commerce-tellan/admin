@@ -10,6 +10,8 @@ interface ProductsTableHeaderProps {
   selectedStatus: string | null;
   onStatusChange: (e: { value: string | null }) => void;
   dropdownOptions: { label: string; value: string | null }[];
+  onDeleteClicked: () => void;
+  onEditClicked: () => void;
 }
 
 const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
@@ -18,6 +20,8 @@ const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
   selectedStatus,
   onStatusChange,
   dropdownOptions,
+  onDeleteClicked,
+  onEditClicked,
 }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 bg-gray-50 border-b border-gray-200 rounded-t">
@@ -44,12 +48,12 @@ const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
       <div className="flex gap-2">
         <IconButton
           icon={<FiEdit3 />}
-          onClick={() => null}
+          onClick={onEditClicked}
           className="h-10 w-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100 mr-2"
         />
         <IconButton
           icon={<AiOutlineDelete />}
-          onClick={() => null}
+          onClick={onDeleteClicked}
           className="h-10 w-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100"
         />
       </div>

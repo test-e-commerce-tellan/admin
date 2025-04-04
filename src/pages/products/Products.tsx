@@ -61,9 +61,9 @@ const Products = () => {
           selectedProducts={selectedProducts}
           setSelectedProducts={setSelectedProducts}
           globalFilter={globalFilter}
-          setGlobalFilter={setGlobalFilter}
-          onDeleteSelected={handleDeleteSelectedProducts}
           dtRef={dt}
+          setGlobalFilter={setGlobalFilter}
+          onDeleteClicked={handleDeleteSelectedProducts}
           onEditClicked={() => console.log("Edit clicked")}
         />
       </div>

@@ -2,21 +2,23 @@ import React from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Product } from "../../../types/Product";
-import { Button } from "primereact/button";
 import ProductsTableHeader from "./ProductsTableHeader";
 import StatusBadge from "../../../components/StatusBadge";
 import { inventoryStatusColor } from "../../../constants/StatusColors";
-import { DataTableStyle, TableHeaderStyle } from "../../../constants/TableStyles";
+import {
+  DataTableStyle,
+  TableHeaderStyle,
+} from "../../../constants/TableStyles";
 
 interface ProductsTableProps {
   products: Product[];
   selectedProducts: Product[];
   setSelectedProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   globalFilter: string;
-  setGlobalFilter: React.Dispatch<React.SetStateAction<string>>;
-  onDeleteSelected: () => void;
-  onEditClicked: () => void;
   dtRef: React.RefObject<DataTable<Product[]>>;
+  setGlobalFilter: React.Dispatch<React.SetStateAction<string>>;
+  onDeleteClicked: () => void;
+  onEditClicked: () => void;
 }
 
 export default function ProductsTable({
@@ -25,9 +27,9 @@ export default function ProductsTable({
   setSelectedProducts,
   globalFilter,
   setGlobalFilter,
-  onDeleteSelected,
-  onEditClicked,
   dtRef,
+  onDeleteClicked,
+  onEditClicked,
 }: ProductsTableProps) {
   const dropdownOptions = [
     { label: "All", value: "All" },
@@ -78,27 +80,6 @@ export default function ProductsTable({
     );
   };
 
-  const actionBodyTemplate = () => {
-    return (
-      <React.Fragment>
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          outlined
-          className="mr-2"
-          onClick={onEditClicked}
-        />
-        <Button
-          icon="pi pi-trash"
-          rounded
-          outlined
-          severity="danger"
-          onClick={onDeleteSelected}
-        />
-      </React.Fragment>
-    );
-  };
-
   return (
     <div>
       <div className="card">
@@ -127,6 +108,8 @@ export default function ProductsTable({
               selectedStatus={null}
               onStatusChange={() => null}
               dropdownOptions={dropdownOptions}
+              onDeleteClicked={onDeleteClicked}
+              onEditClicked={onEditClicked}
             />
           }
         >
