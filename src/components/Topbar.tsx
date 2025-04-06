@@ -1,13 +1,9 @@
 import React from "react";
 import { FiBell, FiMessageSquare, FiSearch } from "react-icons/fi";
-import { TopBarColor } from "../constants/Colors";
 
 const Topbar: React.FC = () => {
   return (
-    <header
-      className="bg-gray-700 text-white shadow-md fixed top-0 left-0 right-0 h-16 flex items-center px-6 z-50"
-      style={{ backgroundColor: TopBarColor }}
-    >
+    <header className="bg-primary-dark text-white shadow-md fixed top-0 left-0 right-0 h-16 flex items-center px-6 z-50">
       <div className="w-64 flex items-center">
         <img src="/images/logo.png" alt="Logo" className="h-10 w-auto" />
       </div>
@@ -17,7 +13,7 @@ const Topbar: React.FC = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="w-full pl-2 pr-4 py-2 rounded bg-transparent text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-gray-500"
+          className="w-full pl-2 pr-4 py-2 rounded bg-transparent text-white placeholder-gray-400 outline-none focus:outline-none"
         />
       </div>
 

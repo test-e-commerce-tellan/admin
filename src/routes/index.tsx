@@ -6,6 +6,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import Orders from "../pages/orders/Orders";
 import Products from "../pages/products/Products";
 import Reports from "../pages/reports/Reports.jsx"
+import Categories from "../pages/categories/Categories.js";
 
 const routes:  RouteObject[] = [
   {
@@ -27,6 +28,10 @@ const routes:  RouteObject[] = [
       {
         path: "reports",
         element: <Reports />,
+      },
+      {
+        path: "categories",
+        element: <Categories />,
       },
       {
         path: "settings",

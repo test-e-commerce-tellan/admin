@@ -1,4 +1,4 @@
-import { SidebarColor } from "../constants/Colors";
+import { JSX } from "react";
 import NavigationItem from "./NavigationItem";
 import {
   FiHome,
@@ -15,7 +15,15 @@ import {
   FiMessageSquare,
 } from "react-icons/fi";
 
-const menuItems = [
+type MenuItem = {
+  name?: string;
+  path?: string;
+  icon?: JSX.Element;
+  trailingText?: string;
+  divider?: string;
+};
+
+const menuItems: MenuItem[] = [
   { name: "Dashboard", path: "/", icon: <FiHome /> },
   { name: "Orders", path: "/orders", icon: <FiList />, trailingText: "16" },
   { name: "Products", path: "/products", icon: <FiTag /> },
@@ -34,9 +42,7 @@ const menuItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-gray-900 text-white h-full overflow-y-auto scrollbar-hide p-4"
-    style={{ backgroundColor: SidebarColor  }}
-    >
+    <aside className="w-64 bg-primary text-white h-full overflow-y-auto scrollbar-hide p-4">
       <nav className="flex flex-col space-y-2">
         {menuItems.map((item, index) =>
           item.divider ? (

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-dark: #070B1D;
-  --color-primary: #1E2753;
-  --color-success: #C4F8E2
+  --color-primary-dark: #070b1d;
+  --color-primary: #1e2753;
+  --color-success: #c4f8e2;
 }
 
 :root {
@@ -20,12 +20,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hide scrollbar but keep scrolling enabled */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

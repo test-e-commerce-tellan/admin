@@ -12,7 +12,7 @@ const UserStatisticsComponent: React.FC<UserStatisticsComponentProps> = ({
   isIncrease,
 }) => {
   return (
-    <div className="flex flex-col bg-white shadow p-4">
+    <div className="flex flex-col p-4">
       <h4 className="text-sm font-semibold text-gray-600">{title}</h4>
       <div className="text-2xl font-bold text-black mt-2">{value}</div>
       <div
