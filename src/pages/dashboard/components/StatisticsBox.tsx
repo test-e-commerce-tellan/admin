@@ -10,7 +10,7 @@ interface StatisticsBoxProps {
 
 const StatisticsBox: React.FC<StatisticsBoxProps> = ({ name, value, percentage, isPositive = true, icon }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 flex items-center justify-between min-w-[200px] max-w-[240px] h-auto">
+    <div className="bg-white rounded-lg shadow-md p-4 flex items-center justify-between min-w-[200px] w-full h-auto">
       <div className="space-y-1">
         <div className="text-sm font-medium text-gray-600">{name}</div>
         <div className="text-xl font-bold text-gray-800">{value}</div>

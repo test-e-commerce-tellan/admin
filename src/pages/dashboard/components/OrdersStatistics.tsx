@@ -25,7 +25,7 @@ const OrderStatistics = () => {
   ];
 
   return (
-    <div className="flex flex-col bg-white rounded text-black p-4">
+    <div className="flex flex-col bg-white rounded text-black p-4 h-full">
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
           <h4 className="text-md font-semibold">Orders Over Time</h4>
@@ -72,7 +72,7 @@ const OrderStatistics = () => {
         </div>
       </div>
 
-      <div className="mt-4">
+      <div>
         <OrderGraph data={data} showMay21={showMay21} showMay22={showMay22} />
       </div>
     </div>

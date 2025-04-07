@@ -18,16 +18,16 @@ export default function NavigationItem({
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `flex items-center justify-between px-3 py-2 rounded mb-2 ${
+        `flex items-center justify-between p-2 rounded mb-2 ${
           isActive
             ? "bg-white text-gray-700"
             : "hover:bg-gray-800 text-gray-300"
         }`
       }
     >
-      <div className="flex items-center space-x-5">
+      <div className="flex items-center space-x-2">
         {/* Increased spacing between icon and text */}
-        <span className="text-lg pr-4">{icon}</span>
+        <span className="text-lg">{icon}</span>
         <span>{text}</span>
       </div>
       {trailingText && (

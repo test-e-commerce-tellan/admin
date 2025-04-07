@@ -11,7 +11,7 @@ const Last7DaysGraph = () => {
   ];
 
   return (
-    <div className="w-full h-64">
+    <div className="w-full h-48">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}

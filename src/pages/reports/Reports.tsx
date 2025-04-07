@@ -44,32 +44,30 @@ const Reports = () => {
         />
       </div>
 
-      <div className="mt-4">
-        <CustomerGrowth />
-      </div>
-
-      <div className="mt-4">
+      <div className="space-y-4 mt-4">
         <CustomerStatistics />
-      </div>
 
-      <div className="mt-4 grid grid-cols-4 gap-3">
-        <CardComponent
-          title={salesGoalData.title}
-          value={salesGoalData.value}
-          totalValue={salesGoalData.totalValue}
-          color={salesGoalData.color}
-          statistics={salesGoalData.statistics}
-        />
-        <CardComponent
-          title={conversionRateData.title}
-          value={conversionRateData.value}
-          totalValue={conversionRateData.totalValue}
-          color={conversionRateData.color}
-          statistics={conversionRateData.statistics}
-        />
-        
-        <div className="col-span-2">
-          <AverageOrderComponent />
+        <CustomerGrowth />
+
+        <div className="grid grid-cols-4 gap-3">
+          <CardComponent
+            title={salesGoalData.title}
+            value={salesGoalData.value}
+            totalValue={salesGoalData.totalValue}
+            color={salesGoalData.color}
+            statistics={salesGoalData.statistics}
+          />
+          <CardComponent
+            title={conversionRateData.title}
+            value={conversionRateData.value}
+            totalValue={conversionRateData.totalValue}
+            color={conversionRateData.color}
+            statistics={conversionRateData.statistics}
+          />
+
+          <div className="col-span-2">
+            <AverageOrderComponent />
+          </div>
         </div>
       </div>
     </div>
