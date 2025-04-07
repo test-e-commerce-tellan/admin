@@ -5,7 +5,7 @@ const Topbar: React.FC = () => {
   return (
     <header className="bg-primary-800 text-white shadow-md fixed top-0 left-0 right-0 h-16 flex items-center px-6 z-50">
       <div className="w-64 flex items-center">
-        <img src="/images/logo.png" alt="Logo" className="h-10 w-auto" />
+        <img src="/images/tellan-logo.png" alt="Logo" className="h-10 w-auto" />
       </div>
 
       <div className="flex-1 flex items-center justify-between">
