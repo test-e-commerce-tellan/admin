@@ -1,5 +1,4 @@
 import React from "react";
-import { FiDelete, FiEdit } from "react-icons/fi";
 
 interface ButtonProps {
   text: string;
