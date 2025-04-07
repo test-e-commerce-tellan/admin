@@ -7,8 +7,18 @@ import Orders from "../pages/orders/Orders";
 import Products from "../pages/products/Products";
 import Reports from "../pages/reports/Reports.jsx"
 import Categories from "../pages/categories/Categories.js";
+import LoginPage from "../pages/login/LoginPage.js";
+import RegisterPage from "../pages/register/RegisterPage.js";
 
 const routes:  RouteObject[] = [
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
   {
     path: "/",
     element: <DashboardLayout />,

@@ -7,12 +7,16 @@
   --color-primary-500: #1e2753;
   --color-primary-800: #070b1d;
   --color-success: #c4f8e2;
+  --color-background: #F5F6FA;
 }
 
 
 @layer components {
   .card {
     @apply bg-white rounded-md shadow-sm p-4 transition hover:shadow-md;
+  }
+  .text-secondary {
+    @apply text-gray-500
   }
 }
 
