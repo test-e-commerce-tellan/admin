@@ -1,6 +1,22 @@
-import { Link } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Login successful");
+      navigate("/");
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
@@ -9,16 +25,18 @@ const LoginPage = () => {
         </h2>
 
         <div className="mb-4 space-x-3 flex items-center justify-center">
-          <span className="text-base text-secondary">New to Our Product?</span>
+          <span className="text-base text-m-secondary">
+            New to Our Product?
+          </span>
           <Link to="/register" className="text-base text-primary">
             Create Account
           </Link>
         </div>
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-secondary"
+              className="block text-sm font-medium text-m-secondary"
             >
               Email
             </label>
@@ -32,7 +50,7 @@ const LoginPage = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-secondary"
+              className="block text-sm font-medium text-m-secondary"
             >
               Password
             </label>
@@ -50,15 +68,18 @@ const LoginPage = () => {
               type="checkbox"
               className="h-4 w-4 text-blue-600 focus:ring-primary border-gray-300 rounded"
             />
-            <label htmlFor="remember" className="text-sm text-secondary">
+            <label htmlFor="remember" className="text-sm text-m-secondary">
               Keep me signed in
             </label>
           </div>
           <button
             type="submit"
-            className="w-full bg-primary-500 text-white py-2 rounded-md hover:bg-blue-900 transition duration-200"
+            className={`w-full ${
+              loading ? "bg-gray-400" : "bg-primary-500"
+            } text-white py-2 rounded-md hover:bg-blue-900 transition duration-200`}
+            disabled={loading}
           >
-            Login
+            {loading ? "Login in Please wait..." : "Login"}
           </button>
         </form>
       </div>

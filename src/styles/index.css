@@ -5,19 +5,11 @@
 
 @tailwind utilities;
 
-@theme {
-  --color-primary: #1E5EFF;
-  --color-primary-500: #1e2753;
-  --color-primary-800: #070b1d;
-  --color-success: #c4f8e2;
-  --color-background: #F5F6FA;
-}
-
 @layer components {
   .card {
     @apply bg-white rounded-md shadow-sm p-4 transition hover:shadow-md;
   }
-  .text-secondary {
+  .text-m-secondary {
     @apply text-gray-500
   }
 }
@@ -41,7 +33,6 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -84,7 +75,6 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -156,4 +146,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+@theme {
+  --color-primary: #1E5EFF;
+  --color-primary-500: #1e2753;
+  --color-primary-800: #070b1d;
+  --color-success: #c4f8e2;
+  --color-background: #F5F6FA;
 }
