@@ -31,7 +31,7 @@ const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
           options={dropdownOptions}
           onChange={onStatusChange}
           placeholder="Filter"
-          className="w-full md:w-48 md:mr-3"
+          className="w-full md:w-48 md:mr-3 focus:outline-none"
         />
 
         <div className="relative flex items-center w-full md:w-64">
@@ -40,7 +40,7 @@ const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
             value={searchTerm}
             onChange={onSearchChange}
             placeholder="Search..."
-            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded focus:outline-none text-sm font-light"
           />
         </div>
       </div>

@@ -36,7 +36,7 @@ const OrdersTableHeader: React.FC<OrdersTableHeaderProps> = ({
             value={searchTerm}
             onChange={onSearchChange}
             placeholder="Search..."
-            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded focus:outline-none font-light text-sm"
           />
         </div>
       </div>

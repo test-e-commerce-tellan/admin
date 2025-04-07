@@ -34,7 +34,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, onSelec
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute right-0 mt-2 w-56 rounded-md shadow-sm bg-white focus:outline-none">
           <div className="py-1">
             {options.map((option, index) => (
               <button
