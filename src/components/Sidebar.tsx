@@ -42,7 +42,7 @@ const menuItems: MenuItem[] = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-primary text-white h-full overflow-y-auto scrollbar-hide p-4">
+    <aside className="w-64 bg-primary-500 text-white h-full overflow-y-auto scrollbar-hide p-4">
       <nav className="flex flex-col space-y-2">
         {menuItems.map((item, index) =>
           item.divider ? (

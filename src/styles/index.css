@@ -1,10 +1,21 @@
 @import "tailwindcss";
 
+@tailwind utilities;
+
 @theme {
-  --color-primary-dark: #070b1d;
-  --color-primary: #1e2753;
+  --color-primary: #1E5EFF;
+  --color-primary-500: #1e2753;
+  --color-primary-800: #070b1d;
   --color-success: #c4f8e2;
 }
+
+
+@layer components {
+  .card {
+    @apply bg-white rounded-md shadow-sm p-4 transition hover:shadow-md;
+  }
+}
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

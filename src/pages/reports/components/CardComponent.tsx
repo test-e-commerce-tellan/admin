@@ -1,45 +1,70 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-const CardComponent = () => {
-  const data = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 },
-  ];
+type Stat = {
+  label: string;
+  value: string | number;
+};
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+type CardComponentProps = {
+  title: string;
+  value: number;
+  totalValue: number;
+  color: string;
+  statistics: Stat[];
+};
+
+const CardComponent: React.FC<CardComponentProps> = ({
+  title,
+  value,
+  totalValue,
+  color,
+  statistics,
+}) => {
+  const percentage = Math.round((value / totalValue) * 100);
 
   return (
-    <div className="flex flex-col bg-white rounded-lg shadow-md p-4">
-      {/* Title at the top-left */}
-      <h4 className="text-lg font-semibold text-gray-700">Card Title</h4>
+    <div className="card flex flex-col w-full max-w-sm">
+      <h4 className="text-lg font-semibold text-gray-700">{title}</h4>
 
-      {/* Center: Pie Chart */}
-      <div className="flex justify-center items-center my-4">
-        <ResponsiveContainer width="80%" height={150}>
+      <div className="relative flex justify-center items-center my-4 h-[180px]">
+        <ResponsiveContainer width="80%" height="100%">
           <PieChart>
             <Pie
-              data={data}
+              data={[
+                { name: title, value },
+                { name: "Other", value: totalValue - value },
+              ]}
               dataKey="value"
               nameKey="name"
               cx="50%"
               cy="50%"
+              innerRadius={45}
               outerRadius={60}
               fill="#8884d8"
+              stroke="none"
             >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
+              <Cell fill={color} />
+              <Cell fill="#e0e0e0" />
             </Pie>
           </PieChart>
         </ResponsiveContainer>
+
+        <div className="absolute text-center">
+          <span className="text-xl font-bold text-gray-800">{percentage}%</span>
+        </div>
       </div>
 
-      {/* Bottom Row */}
-      <div className="flex justify-between items-center border-t border-gray-300 pt-4">
-        <span className="text-sm font-medium text-gray-600">Bottom Title</span>
-        <span className="text-lg font-bold text-gray-800">Value</span>
+      <div className="pt-1">
+        {statistics.map((stat, index) => (
+          <div key={index} className="flex justify-between py-1">
+            <span className="text-sm font-light text-gray-500">
+              {stat.label}
+            </span>
+            <span className="text-medium font-bold text-gray-800">
+              {stat.value}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
