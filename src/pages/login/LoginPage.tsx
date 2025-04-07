@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import { FaFacebook } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -24,7 +25,7 @@ const LoginPage = () => {
           Sign In
         </h2>
 
-        <div className="mb-4 space-x-3 flex items-center justify-center">
+        <div className="mb-6 space-x-3 flex items-center justify-center">
           <span className="text-base text-m-secondary">
             New to Our Product?
           </span>
@@ -32,6 +33,7 @@ const LoginPage = () => {
             Create Account
           </Link>
         </div>
+
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label
@@ -81,6 +83,30 @@ const LoginPage = () => {
           >
             {loading ? "Login in Please wait..." : "Login"}
           </button>
+          <div className="mx-10 flex justify-center">
+            <span className="text-center text-sm text-gray-600">
+              <Link to="/reset-password" className="text-primary">
+                Forgot your password?
+              </Link>
+            </span>
+          </div>
+          <div className="border-b border-gray-400"></div>
+
+          <div className="space-y-3 mt-4">
+            <button className="w-full border border-gray-300 text-primary py-2 rounded-md hover:bg-gray-100 transition duration-200 flex items-center justify-center space-x-2">
+              <img
+                src="/images/google-icon.png"
+                alt="Google Icon"
+                className="h-5 w-5"
+              />
+              <span>Continue with Google</span>
+            </button>
+
+            <button className="w-full border border-gray-300 text-primary py-2 rounded-md hover:bg-gray-100 transition duration-200 flex items-center justify-center space-x-2">
+              <FaFacebook className="h-5 w-5 text-blue-600" />
+              <span>Continue with Facebook</span>
+            </button>
+          </div>
         </form>
       </div>
     </div>

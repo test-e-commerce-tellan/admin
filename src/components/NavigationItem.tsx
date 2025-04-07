@@ -18,7 +18,7 @@ export default function NavigationItem({
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `flex items-center justify-between p-3 rounded mb-2 ${
+        `flex items-center justify-between px-3 py-2 rounded mb-2 ${
           isActive
             ? "bg-white text-gray-700"
             : "hover:bg-gray-800 text-gray-300"
