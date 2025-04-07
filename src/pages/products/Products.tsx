@@ -47,7 +47,7 @@ const Products = () => {
           />
 
           <PrimaryButton
-            text="Add Order"
+            text="Add Product"
             className="font-bold"
             icon={<FiPlus />}
             onClick={handleAddProduct}

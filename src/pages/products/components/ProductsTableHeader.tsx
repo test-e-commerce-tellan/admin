@@ -24,14 +24,14 @@ const ProductsTableHeader: React.FC<ProductsTableHeaderProps> = ({
   onEditClicked,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 bg-gray-50 border-b border-gray-200 rounded-t">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-4 p-2 bg-gray-50 border-b border-gray-200 rounded-t">
       <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
         <Dropdown
           value={selectedStatus}
           options={dropdownOptions}
           onChange={onStatusChange}
           placeholder="Filter"
-          className="w-full md:w-48 md:mr-3 focus:outline-none"
+          className="w-full md:w-48 md:mr-3 h-12 focus:outline-none"
         />
 
         <div className="relative flex items-center w-full md:w-64">

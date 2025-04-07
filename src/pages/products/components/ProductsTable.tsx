@@ -53,7 +53,7 @@ export default function ProductsTable({
           src={rowData.imageUrl}
           alt={rowData.name}
           className="shadow-2 border-round mr-3"
-          style={{ width: "64px", height: "64px", objectFit: "cover" }}
+          style={{ width: "24px", height: "24px", objectFit: "cover" }}
         />
 
         <div>
@@ -100,6 +100,7 @@ export default function ProductsTable({
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
           scrollable
           scrollHeight="500px"
+          size="small"
           globalFilter={globalFilter}
           header={
             <ProductsTableHeader

@@ -92,6 +92,7 @@ const OrdersTable = () => {
         dataKey="orderNumber"
         tableStyle={DataTableStyle}
         selection={selectedOrders}
+        size="small"
         selectionMode="multiple"
         onSelectionChange={(e) => {
           const selected = Array.isArray(e.value) ? e.value : [e.value];
@@ -101,7 +102,7 @@ const OrdersTable = () => {
         rows={10}
         rowsPerPageOptions={[10, 20, 50]}
         scrollable
-        scrollHeight="400px"
+        scrollHeight="500px"
         header={
           <OrdersTableHeader
             searchTerm={searchTerm}
