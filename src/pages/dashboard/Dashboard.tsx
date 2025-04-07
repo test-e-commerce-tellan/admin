@@ -6,6 +6,7 @@ import RecentTransactions from "../../components/RecentTransactions";
 import TopProducts from "./components/TopProducts";
 
 const Dashboard = () => {
+
   return (
     <div className="w-full flex flex-col space-y-8 p-2">
       <div className="flex justify-between items-center p-4 rounded">

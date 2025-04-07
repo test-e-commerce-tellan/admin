@@ -54,10 +54,10 @@ export default function Sidebar() {
             </div>
           ) : (
             <NavigationItem
-              key={item.path}
-              to={item.path}
+              key={item.path || `item-${index}`}
+              to={item.path || "/"}
               icon={item.icon}
-              text={item.name}
+              text={item.name || "Unknown"}
               trailingText={item.trailingText}
             />
           )

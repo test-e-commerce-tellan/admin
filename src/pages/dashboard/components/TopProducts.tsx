@@ -4,11 +4,10 @@ import { TextPrimary } from "../../../constants/Colors";
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/Product";
 import { getTopProductsByUnitsSold } from "../../../service/ProductService";
+import { TopProduct } from "../../../types/TopProduct";
 
 const TopProducts = () => {
-  const [topProducts, setTopProducts] = useState<Product[] | undefined>(
-    undefined
-  );
+  const [topProducts, setTopProducts] = useState<TopProduct[]>([]);
 
   useEffect(() => {
     getTopProductsByUnitsSold().then((data) => setTopProducts(data));
