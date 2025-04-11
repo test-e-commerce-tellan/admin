@@ -1,22 +1,34 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "../../store/hooks.ts";
+import { loginUser } from "../../store/features/auth/authSlice.ts";
 
 const LoginPage = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { user, status, error } = useAppSelector((state) => state.auth);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(loginUser({ value: phone, password }));
+  };
 
-    setTimeout(() => {
-      setLoading(false);
+  useEffect(() => {
+    if (status === "succeeded" && user) {
       toast.success("Login successful");
       navigate("/");
-    }, 2000);
-  };
+    }
+
+    if (status === "failed" && error) {
+      toast.error(error);
+    }
+  }, [status, user, error, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
@@ -37,18 +49,22 @@ const LoginPage = () => {
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label
-              htmlFor="email"
+              htmlFor="phone"
               className="block text-sm font-medium text-m-secondary"
             >
-              Email
+              Phone
             </label>
             <input
-              id="email"
-              type="email"
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Enter Email Address"
+              placeholder="Enter Phone Number"
+              required
             />
           </div>
+
           <div>
             <label
               htmlFor="password"
@@ -59,8 +75,11 @@ const LoginPage = () => {
             <input
               id="password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="Enter Password"
+              required
             />
           </div>
 
@@ -74,15 +93,17 @@ const LoginPage = () => {
               Keep me signed in
             </label>
           </div>
+
           <button
             type="submit"
             className={`w-full ${
-              loading ? "bg-gray-400" : "bg-primary-500"
+              status === "loading" ? "bg-gray-400" : "bg-primary-500"
             } text-white py-2 rounded-md hover:bg-blue-900 transition duration-200`}
-            disabled={loading}
+            disabled={status === "loading"}
           >
-            {loading ? "Login in Please wait..." : "Login"}
+            {status === "loading" ? "Logging in..." : "Login"}
           </button>
+
           <div className="mx-10 flex justify-center">
             <span className="text-center text-sm text-gray-600">
               <Link to="/reset-password" className="text-primary">
@@ -90,7 +111,8 @@ const LoginPage = () => {
               </Link>
             </span>
           </div>
-          <div className="border-b border-gray-400"></div>
+
+          <div className="border-b border-gray-400 my-4"></div>
 
           <div className="space-y-3 mt-4">
             <button className="w-full border border-gray-300 text-primary py-2 rounded-md hover:bg-gray-100 transition duration-200 flex items-center justify-center space-x-2">
