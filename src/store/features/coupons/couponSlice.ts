@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "../../../service/api";
 import { Coupon } from "../../../types/Coupon";
+import { CreateCouponRequest } from "../../../types/CreateCouponRequest";
 
 interface CouponsState {
   coupons: Coupon[];
@@ -30,6 +31,21 @@ export const fetchCoupons = createAsyncThunk<
   }
 });
 
+export const createCoupon = createAsyncThunk<
+  Coupon,
+  CreateCouponRequest,
+  { rejectValue: string }
+>("marketting/createCoupon", async (couponData, { rejectWithValue }) => {
+  try {
+    const response = await axios.post("/marketing/coupons", couponData);
+    return response.data as Coupon;
+  } catch (err: any) {
+    return rejectWithValue(
+      err.response?.data?.error || "Failed to create coupon"
+    );
+  }
+});
+
 const couponsSlice = createSlice({
   name: "coupons",
   initialState,
@@ -50,6 +66,21 @@ const couponsSlice = createSlice({
       .addCase(fetchCoupons.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload || "Failed to fetch coupons";
+      })
+      // create coupons
+      .addCase(createCoupon.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(
+        createCoupon.fulfilled,
+        (state, action: PayloadAction<Coupon>) => {
+          state.status = "succeeded";
+        }
+      )
+      .addCase(createCoupon.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Failed to create coupon";
       });
   },
 });
