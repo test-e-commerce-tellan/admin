@@ -10,6 +10,7 @@ import Categories from "../pages/categories/Categories.js";
 import LoginPage from "../pages/login/LoginPage.js";
 import RegisterPage from "../pages/register/RegisterPage.js";
 import ResetPassword from "../pages/reset-pasword/ResetPassword.js";
+import Coupons from "../pages/coupons/Coupons.js";
 
 const routes:  RouteObject[] = [
   {
@@ -46,6 +47,10 @@ const routes:  RouteObject[] = [
       {
         path: "categories",
         element: <Categories />,
+      },
+      {
+        path: "coupons",
+        element: <Coupons />,
       },
       {
         path: "settings",

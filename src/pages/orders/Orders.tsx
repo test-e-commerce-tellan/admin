@@ -24,7 +24,7 @@ const Orders = () => {
         </div>
       </div>
 
-      <div className="mt-4 p-4 bg-white rounded">
+      <div className="mt-4 bg-white rounded">
         <OrdersTable/>
       </div>
     </>

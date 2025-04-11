@@ -74,11 +74,12 @@ const OrdersTable = () => {
     rowData: Order,
     statusField: "paymentStatus" | "orderStatus"
   ) => {
+    const status = rowData[statusField];
     const statusColors =
       statusField === "paymentStatus" ? paymentStatusColors : orderStatusColors;
-    return (
-      <StatusBadge status={rowData[statusField]} statusColors={statusColors} />
-    );
+    const colorClass = statusColors[status];
+
+    return <StatusBadge text={status} className={colorClass} />;
   };
 
   const totalTemplate = (rowData: Order) => {
@@ -86,7 +87,7 @@ const OrdersTable = () => {
   };
 
   return (
-    <div className="bg-white h-full rounded">
+    <div className="card">
       <DataTable
         value={filteredOrders}
         dataKey="orderNumber"

@@ -76,7 +76,7 @@ export default function ProductsTable({
     return rowData.totalInventory > 0 ? (
       rowData.totalInventory + " in stock"
     ) : (
-      <StatusBadge status="Out Of Stock" statusColors={inventoryStatusColor} />
+      <StatusBadge text="Out Of Stock" className={inventoryStatusColor["Out Of Stock"]} />
     );
   };
 

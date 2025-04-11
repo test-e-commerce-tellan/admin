@@ -16,12 +16,12 @@ const RecentTransactions = () => {
     getRecentTransactions().then((data) => setTransactions(data));
   }, []);
 
-  const statusTemplate = (rowData: Transaction) => (
-    <StatusBadge
-      status={rowData.status}
-      statusColors={transactionStatusColors}
-    />
-  );
+  const statusTemplate = (rowData: Transaction) => {
+    const status = rowData.status;
+    const colorClass =
+      transactionStatusColors[status] || "bg-gray-500 text-white";
+    return <StatusBadge text={status} className={colorClass} />;
+  };
 
   return (
     <>

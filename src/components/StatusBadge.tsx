@@ -1,13 +1,15 @@
 interface StatusBadgeProps {
-  status: string;
-  statusColors: { [key: string]: string };
+  text: string;
+  className?: string;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status, statusColors }) => {
-  const colorClass = statusColors[status] || "bg-gray-500 text-white";
+const StatusBadge: React.FC<StatusBadgeProps> = ({
+  text,
+  className = "bg-gray-500 text-white",
+}) => {
   return (
-    <span className={`px-2 py-1 rounded text-xs font-light ${colorClass}`}>
-      {status}
+    <span className={`px-2 py-1 rounded text-xs font-light ${className}`}>
+      {text}
     </span>
   );
 };
