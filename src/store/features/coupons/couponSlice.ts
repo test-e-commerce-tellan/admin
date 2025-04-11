@@ -74,7 +74,7 @@ const couponsSlice = createSlice({
       })
       .addCase(
         createCoupon.fulfilled,
-        (state, action: PayloadAction<Coupon>) => {
+        (state) => {
           state.status = "succeeded";
         }
       )
