@@ -16,7 +16,7 @@ export const PrimaryButton: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none transition duration-200 ${className}`}
+      className={`flex items-center px-4 py-2 font-bold bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none transition duration-200 ${className}`}
     >
       {icon && <span className="mr-2">{icon}</span>}
       {text}
@@ -32,7 +32,7 @@ export const SecondaryButton: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-100 focus:outline-none transition duration-200 ${className}`}
+      className={`px-4 py-2 border border-blue-500 font-bold text-blue-500 rounded hover:bg-blue-100 focus:outline-none transition duration-200 ${className}`}
     >
       {text}
     </button>
