@@ -1,3 +1,4 @@
+
 import { JSX } from "react";
 import NavigationItem from "./NavigationItem";
 import {
@@ -13,6 +14,7 @@ import {
   FiList,
   FiStar,
   FiMessageSquare,
+  FiBookOpen,
 } from "react-icons/fi";
 
 type MenuItem = {
@@ -31,6 +33,7 @@ const menuItems: MenuItem[] = [
   { name: "Customers", path: "/customers", icon: <FiUsers /> },
   { name: "Reports", path: "/reports", icon: <FiBarChart2 /> },
   { name: "Coupons", path: "/coupons", icon: <FiStar /> },
+  { name: "Recipes", path: "/recipes", icon: <FiBookOpen /> },
   { name: "Inbox", path: "/inbox", icon: <FiMessageSquare /> },
   { divider: "Other Information" },
   { name: "Knowledge Base", path: "/knowledge-base", icon: <FiBook /> },

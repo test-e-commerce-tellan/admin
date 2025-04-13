@@ -3,13 +3,13 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { Coupon } from "../../../types/Coupon";
 import { fetchCoupons } from "../../../store/features/coupons/couponSlice.ts";
-import { ProgressSpinner } from "primereact/progressspinner";
 import {
   DataTableStyle,
   TableHeaderStyle,
 } from "../../../constants/TableStyles";
 import StatusBadge from "../../../components/StatusBadge";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks.ts";
+import ProgressIndicator from "../../../components/ProgressIndicator.tsx";
 
 const CouponsTable = () => {
   const dispatch = useAppDispatch();
@@ -43,7 +43,7 @@ const CouponsTable = () => {
   if (status === "loading") {
     return (
       <div className="p-4 flex justify-center items-center h-full">
-        <ProgressSpinner/>
+        <ProgressIndicator />
       </div>
     );
   }

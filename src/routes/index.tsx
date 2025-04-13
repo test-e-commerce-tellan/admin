@@ -5,15 +5,16 @@ import DashboardLayout from "../components/DashboardLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Orders from "../pages/orders/Orders";
 import Products from "../pages/products/Products";
-import Reports from "../pages/reports/Reports.jsx"
+import Reports from "../pages/reports/Reports.jsx";
 import Categories from "../pages/categories/Categories.js";
 import LoginPage from "../pages/login/LoginPage.js";
 import RegisterPage from "../pages/register/RegisterPage.js";
 import ResetPassword from "../pages/reset-pasword/ResetPassword.js";
 import Coupons from "../pages/coupons/Coupons.js";
 import AddCoupon from "../pages/coupons/AddCoupon.js";
+import Recipes from "../pages/recipes/Recipes.js";
 
-const routes:  RouteObject[] = [
+const routes: RouteObject[] = [
   {
     path: "/login",
     element: <LoginPage />,
@@ -21,7 +22,8 @@ const routes:  RouteObject[] = [
   {
     path: "/register",
     element: <RegisterPage />,
-  },{
+  },
+  {
     path: "/reset-password",
     element: <ResetPassword />,
   },
@@ -52,6 +54,10 @@ const routes:  RouteObject[] = [
       {
         path: "coupons",
         element: <Coupons />,
+      },
+      {
+        path: "recipes",
+        element: <Recipes />,
       },
       {
         path: "coupons/new",
