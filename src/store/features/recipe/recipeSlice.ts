@@ -77,7 +77,6 @@ export const updateRecipe = createAsyncThunk<
   }
 });
 
-
 export const deleteRecipe = createAsyncThunk<
   string,
   string,
@@ -87,7 +86,9 @@ export const deleteRecipe = createAsyncThunk<
     await axios.delete(`/marketing/recipes/${id}`);
     return id;
   } catch (err: any) {
-    return rejectWithValue(err.response?.data?.error || "Failed to delete recipe");
+    return rejectWithValue(
+      err.response?.data?.error || "Failed to delete recipe"
+    );
   }
 });
 
@@ -133,12 +134,21 @@ const recipesSlice = createSlice({
         state.error = action.payload || "Failed to fetch recipe";
       })
 
+      .addCase(createRecipe.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(
         createRecipe.fulfilled,
         (state, action: PayloadAction<Recipe>) => {
           state.recipes.push(action.payload);
+          state.status = "succeeded";
         }
       )
+      .addCase(createRecipe.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Failed to create recipe";
+      })
 
       .addCase(
         updateRecipe.fulfilled,

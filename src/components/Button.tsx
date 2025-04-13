@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   icon?: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
 export const PrimaryButton: React.FC<ButtonProps> = ({
@@ -16,7 +17,7 @@ export const PrimaryButton: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center px-4 py-2 font-bold bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none transition duration-200 ${className}`}
+      className={`flex items-center px-4 py-2 font-bold bg-primary text-white rounded hover:bg-blue-800 focus:outline-none transition duration-100 ${className}`}
     >
       {icon && <span className="mr-2">{icon}</span>}
       {text}
@@ -32,7 +33,7 @@ export const SecondaryButton: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 border border-blue-500 font-bold text-blue-500 rounded hover:bg-blue-100 focus:outline-none transition duration-200 ${className}`}
+      className={`px-4 py-2 border border-blue-500 font-bold text-blue-500 rounded hover:bg-blue-100 focus:outline-none transition duration-100 ${className}`}
     >
       {text}
     </button>
@@ -53,7 +54,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`px-2 py-2 border rounded hover:bg-gray-100 focus:outline-none transition duration-200 ${className}`}
+      className={`px-2 py-2 border rounded hover:bg-gray-100 focus:outline-none transition duration-100 ${className}`}
     >
       {icon}
     </button>

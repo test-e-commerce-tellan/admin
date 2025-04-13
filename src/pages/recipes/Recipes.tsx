@@ -1,14 +1,17 @@
 import { FiPlus } from "react-icons/fi";
 import { PrimaryButton, SecondaryButton } from "../../components/Button";
 import RecipeTable from "./components/RecipeTable";
+import { useNavigate } from "react-router-dom";
 
 const Recipes = () => {
+  const navigate = useNavigate();
+
   function handleExport(): void {
     throw new Error("Function not implemented.");
   }
 
   function handleAddRecipe(): void {
-    throw new Error("Function not implemented.");
+    navigate("/recipes/new");
   }
 
   return (

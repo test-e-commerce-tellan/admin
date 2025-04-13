@@ -13,6 +13,7 @@ import ResetPassword from "../pages/reset-pasword/ResetPassword.js";
 import Coupons from "../pages/coupons/Coupons.js";
 import AddCoupon from "../pages/coupons/AddCoupon.js";
 import Recipes from "../pages/recipes/Recipes.js";
+import AddRecipe from "../pages/recipes/AddRecipe.js";
 
 const routes: RouteObject[] = [
   {
@@ -58,6 +59,10 @@ const routes: RouteObject[] = [
       {
         path: "recipes",
         element: <Recipes />,
+      },
+      {
+        path: "recipes/new",
+        element: <AddRecipe />,
       },
       {
         path: "coupons/new",
