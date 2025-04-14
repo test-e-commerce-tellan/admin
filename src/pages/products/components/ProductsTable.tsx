@@ -1,7 +1,7 @@
 import React from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Product } from "../../../types/Product";
+import { OldProduct } from "../../../types/OldProduct";
 import ProductsTableHeader from "./ProductsTableHeader";
 import StatusBadge from "../../../components/StatusBadge";
 import { inventoryStatusColor } from "../../../constants/StatusColors";
@@ -11,11 +11,11 @@ import {
 } from "../../../constants/TableStyles";
 
 interface ProductsTableProps {
-  products: Product[];
-  selectedProducts: Product[];
-  setSelectedProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  products: OldProduct[];
+  selectedProducts: OldProduct[];
+  setSelectedProducts: React.Dispatch<React.SetStateAction<OldProduct[]>>;
   globalFilter: string;
-  dtRef: React.RefObject<DataTable<Product[]>>;
+  dtRef: React.RefObject<DataTable<OldProduct[]>>;
   setGlobalFilter: React.Dispatch<React.SetStateAction<string>>;
   onDeleteClicked: () => void;
   onEditClicked: () => void;
@@ -46,7 +46,7 @@ export default function ProductsTable({
     });
   };
 
-  const imageBodyTemplate = (rowData: Product) => {
+  const imageBodyTemplate = (rowData: OldProduct) => {
     return (
       <div className="flex items-center">
         <img
@@ -64,15 +64,15 @@ export default function ProductsTable({
     );
   };
 
-  const priceBodyTemplate = (rowData: Product) => {
+  const priceBodyTemplate = (rowData: OldProduct) => {
     return formatCurrency(rowData.price);
   };
 
-  const ratingBodyTemplate = (rowData: Product) => {
+  const ratingBodyTemplate = (rowData: OldProduct) => {
     return <span>{rowData.rating.toFixed(1)} (20 votes)</span>;
   };
 
-  const inventoryBodyTemplate = (rowData: Product) => {
+  const inventoryBodyTemplate = (rowData: OldProduct) => {
     return rowData.totalInventory > 0 ? (
       rowData.totalInventory + " in stock"
     ) : (

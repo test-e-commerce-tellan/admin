@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import ProductsTable from "./components/ProductsTable";
 import { generateProducts } from "../../service/ProductService";
-import { Product } from "../../types/Product";
+import { OldProduct } from "../../types/OldProduct";
 import { DataTable } from "primereact/datatable";
 import { PrimaryButton, SecondaryButton } from "../../components/Button";
 import { FiPlus } from "react-icons/fi";
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<OldProduct[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<OldProduct[]>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
-  const dt = useRef<DataTable<Product[]>>(null!);
+  const dt = useRef<DataTable<OldProduct[]>>(null!);
 
   useEffect(() => {
     generateProducts().then((data) => setProducts(data));

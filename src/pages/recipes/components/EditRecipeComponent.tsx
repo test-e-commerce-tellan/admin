@@ -15,8 +15,9 @@ import { PrimaryButton, SecondaryButton } from "../../../components/Button";
 import MarkdownEditor from "@uiw/react-md-editor";
 import ImageThumbnail from "../../../components/ImageThumbnail";
 import ProgressIndicator from "../../../components/ProgressIndicator";
-import { FiPlus } from "react-icons/fi";
 import { EditRecipeRequest } from "../../../types/EditRecipeRequest";
+import IngredientItem from "./IngredientItem";
+import { fetchProducts } from "../../../store/features/products/productSlice";
 
 const EditRecipeComponent = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,8 @@ const EditRecipeComponent = () => {
   const { status: recipeStatus, error } = useAppSelector(
     (state) => state.recipes
   );
+  const { products } = useAppSelector((state) => state.products);
+
   const {
     images,
     status: uploadStatus,
@@ -43,6 +46,10 @@ const EditRecipeComponent = () => {
       dispatch(fetchRecipeById(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     if (recipe) {
@@ -101,6 +108,12 @@ const EditRecipeComponent = () => {
   };
 
   const handleCancel = () => navigate(-1);
+
+  const handleToggleProduct = (id: string) => {
+    setProductIds((prev) =>
+      prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
+    );
+  };
 
   if (recipeStatus == "loading" && !recipe) {
     return (
@@ -161,12 +174,18 @@ const EditRecipeComponent = () => {
 
           <div>
             <h2 className="text-sm font-medium mb-2">Ingredients</h2>
-            <div className="flex flex-col space-y-2">
-              {/* Render associated ingredients if needed */}
-              <button className="w-full flex items-center justify-center gap-2 border border-primary rounded px-4 py-2 text-primary hover:bg-primary/10 transition duration-100 mt-2">
-                <FiPlus className="text-primary" />
-                <span className="text-primary font-normal">Add Ingredient</span>
-              </button>
+            <div className="flex flex-col space-y-2 max-h-80 overflow-y-auto pr-2">
+              {products.map((product) => {
+                return (
+                  <IngredientItem
+                    key={product.id}
+                    checked={productIds.includes(product.id)}
+                    image={product.images[0] ?? ""}
+                    description={product.name}
+                    onToggle={() => handleToggleProduct(product.id)}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Product } from "../types/Product";
+import { OldProduct } from "../types/OldProduct";
 import { TopProduct } from "../types/TopProduct";
 
 export const getTopProductsByUnitsSold = async (): Promise<TopProduct[]> => {
@@ -53,10 +53,10 @@ const imageUrls = [
 const categories = ["Electronics", "Clothing", "Home", "Sports", "Toys"];
 const colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"];
 
-export const generateProducts = async (): Promise<Product[]> => {
+export const generateProducts = async (): Promise<OldProduct[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const products: Product[] = Array.from({ length: 100 }, (_, index) => {
+      const products: OldProduct[] = Array.from({ length: 100 }, (_, index) => {
         const randomImage = imageUrls[Math.floor(Math.random() * imageUrls.length)];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];

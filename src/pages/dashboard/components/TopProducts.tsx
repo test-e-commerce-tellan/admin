@@ -2,7 +2,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { TextPrimary } from "../../../constants/Colors";
 import { useEffect, useState } from "react";
-import { Product } from "../../../types/Product";
+import { OldProduct } from "../../../types/OldProduct";
 import { getTopProductsByUnitsSold } from "../../../service/ProductService";
 import { TopProduct } from "../../../types/TopProduct";
 
@@ -13,7 +13,7 @@ const TopProducts = () => {
     getTopProductsByUnitsSold().then((data) => setTopProducts(data));
   }, []);
 
-  const nameTemplate = (rowData: Product) => (
+  const nameTemplate = (rowData: OldProduct) => (
     <div className="flex items-center">
       <img
         src={rowData.imageUrl}
@@ -24,7 +24,7 @@ const TopProducts = () => {
     </div>
   );
 
-  const priceTemplate = (rowData: Product) => (
+  const priceTemplate = (rowData: OldProduct) => (
     <span>${rowData.price.toFixed(2)}</span>
   );
 
