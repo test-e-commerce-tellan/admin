@@ -9,12 +9,12 @@ import Reports from "../pages/reports/Reports.jsx";
 import Categories from "../pages/categories/Categories.js";
 import LoginPage from "../pages/login/LoginPage.js";
 import RegisterPage from "../pages/register/RegisterPage.js";
-import ResetPassword from "../pages/reset-pasword/ResetPassword.js";
-import Coupons from "../pages/coupons/Coupons.js";
-import AddCoupon from "../pages/coupons/AddCoupon.js";
-import Recipes from "../pages/recipes/Recipes.js";
-import AddRecipe from "../pages/recipes/AddRecipe.js";
-import EditRecipe from "../pages/recipes/components/EditRecipeComponent.js";
+import ResetPassword from "../pages/reset-pasword/ResetPassword";
+import Coupons from "../pages/coupons/Coupons";
+import AddCoupon from "../pages/coupons/AddCoupon";
+import Recipes from "../pages/recipes/Recipes";
+import AddRecipe from "../pages/recipes/AddRecipe";
+import EditRecipe from "../pages/recipes/EditRecipe";
 
 const routes: RouteObject[] = [
   {

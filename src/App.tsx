@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <RoutesWrapper />
-      <Toaster />
+      <Toaster position="top-right" />
     </Router>
   );
 }

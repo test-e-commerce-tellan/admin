@@ -9,6 +9,8 @@ interface RecipesState {
   recipes: Recipe[];
   selectedRecipe: RecipeWithDetails | null;
   status: "idle" | "loading" | "succeeded" | "failed";
+  deleteStatus: "idle" | "loading" | "succeeded" | "failed";
+  deleteError: string | null;
   error: string | null;
 }
 
@@ -16,6 +18,8 @@ const initialState: RecipesState = {
   recipes: [],
   selectedRecipe: null,
   status: "idle",
+  deleteStatus: "idle",
+  deleteError: null,
   error: null,
 };
 
@@ -85,7 +89,7 @@ export const deleteRecipe = createAsyncThunk<
   { rejectValue: string }
 >("recipes/deleteRecipe", async (id, { rejectWithValue }) => {
   try {
-    await axios.delete(`/marketing/recipes/${id}`);
+    await axios.delete(`/marketing/recipes`, { data: { id } });
     return id;
   } catch (err: any) {
     return rejectWithValue(
@@ -171,12 +175,21 @@ const recipesSlice = createSlice({
         state.error = action.payload || "Error updating recipe";
       })
 
+      .addCase(deleteRecipe.pending, (state) => {
+        state.deleteStatus = "loading";
+        state.deleteError = null;
+      })
       .addCase(
         deleteRecipe.fulfilled,
         (state, action: PayloadAction<string>) => {
+          state.deleteStatus = "succeeded";
           state.recipes = state.recipes.filter((r) => r.id !== action.payload);
         }
-      );
+      )
+      .addCase(deleteRecipe.rejected, (state, action) => {
+        state.deleteStatus = "failed";
+        state.deleteError = action.payload || "Failed to delete recipe";
+      });
   },
 });
 

@@ -16,7 +16,7 @@ const Recipes = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col h-full">
         <div className="flex flex-row justify-between items-center">
           <h4 className="text-base font-bold">Recipes</h4>
           <div className="flex space-x-2">
@@ -35,7 +35,7 @@ const Recipes = () => {
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 h-full">
           <RecipeTable />
         </div>
       </div>

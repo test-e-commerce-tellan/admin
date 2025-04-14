@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { Recipe } from "../../../types/Recipe";
-import { fetchRecipes } from "../../../store/features/recipe/recipeSlice.ts";
+import {
+  deleteRecipe,
+  fetchRecipes,
+} from "../../../store/features/recipe/recipeSlice.ts";
 import {
   DataTableStyle,
   TableHeaderStyle,
@@ -11,21 +14,50 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import ProgressIndicator from "../../../components/ProgressIndicator.tsx";
 import { FiEdit, FiTrash } from "react-icons/fi";
-import { IconButton } from "../../../components/Button.tsx";
+import { IconButton, PrimaryButton } from "../../../components/Button.tsx";
 import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 const RecipeTable = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { recipes, status, error } = useAppSelector((state) => state.recipes);
+  const { deleteStatus, deleteError } = useAppSelector(
+    (state) => state.recipes
+  );
   const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [recipeToDelete, setRecipeToDelete] = useState<Recipe | null>(null);
+  const [deletionInProgress, setDeletionInProgress] = useState(false);
+
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchRecipes());
+    dispatch(fetchRecipes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!deletionInProgress) return;
+
+    if (deleteStatus === "succeeded") {
+      toast.success("Recipe deleted successfully.");
+      setOpenDialog(false);
+      setDeletionInProgress(false);
     }
-  }, [status, dispatch]);
+
+    if (deleteStatus === "failed") {
+      toast.error(deleteError || "Failed to delete recipe.");
+      setDeletionInProgress(false);
+    }
+  }, [deleteStatus, deletionInProgress, deleteError]);
 
   const imageTemplate = (rowData: Recipe) => (
     <img
@@ -37,7 +69,7 @@ const RecipeTable = () => {
 
   if (status === "loading") {
     return (
-      <div className="p-4 flex justify-center items-center h-full">
+      <div className="w-full h-full flex justify-center items-center">
         <ProgressIndicator />
       </div>
     );
@@ -49,6 +81,13 @@ const RecipeTable = () => {
 
   const handleEdit = (id: string) => {
     navigate(`/recipes/${id}/edit`);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (recipeToDelete) {
+      setDeletionInProgress(true)
+      dispatch(deleteRecipe(recipeToDelete.id));
+    }
   };
 
   return (
@@ -96,7 +135,10 @@ const RecipeTable = () => {
 
               <IconButton
                 icon={<FiTrash />}
-                onClick={() => console.log("Delete clicked")}
+                onClick={() => {
+                  setRecipeToDelete(rowData);
+                  setOpenDialog(true);
+                }}
                 className="text-red-600 hover:text-red-800"
               />
             </div>
@@ -104,6 +146,37 @@ const RecipeTable = () => {
           headerStyle={TableHeaderStyle}
         />
       </DataTable>
+
+      {/* ShadCN Dialog for delete confirmation */}
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Recipe</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete{" "}
+              <span className="font-semibold text-black">
+                {recipeToDelete?.name}
+              </span>
+              ?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end gap-2">
+            <button
+              onClick={() => setOpenDialog(false)}
+              className="text-sm px-4 py-1 rounded bg-gray-100 hover:bg-gray-200"
+            >
+              Cancel
+            </button>
+
+            <PrimaryButton
+              text={deleteStatus === "loading" ? "Deleting..." : "Yes, Delete"}
+              disabled={deleteStatus === "loading"}
+              onClick={handleDeleteConfirm}
+              className="text-sm py-1 rounded bg-red-600 text-white hover:bg-red-700"
+            />
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

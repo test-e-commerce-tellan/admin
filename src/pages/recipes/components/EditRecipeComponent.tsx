@@ -102,6 +102,13 @@ const EditRecipeComponent = () => {
 
   const handleCancel = () => navigate(-1);
 
+  if (recipeStatus == "loading" && !recipe) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <ProgressIndicator />
+      </div>
+    );
+  }
   return (
     <div className="bg-white rounded-xl w-full h-screen flex flex-col">
       <div className="bg-white rounded-xl w-full mx-auto space-y-6">
@@ -182,7 +189,7 @@ const EditRecipeComponent = () => {
             className="px-6"
           />
           <PrimaryButton
-            text={recipeStatus === "loading" ? "Saving..." : "Update"}
+            text={recipeStatus === "loading" ? "Updating..." : "Update"}
             onClick={handleUpdate}
             disabled={recipeStatus === "loading"}
             className="px-10"
