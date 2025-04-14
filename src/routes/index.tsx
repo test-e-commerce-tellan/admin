@@ -14,6 +14,7 @@ import Coupons from "../pages/coupons/Coupons.js";
 import AddCoupon from "../pages/coupons/AddCoupon.js";
 import Recipes from "../pages/recipes/Recipes.js";
 import AddRecipe from "../pages/recipes/AddRecipe.js";
+import EditRecipe from "../pages/recipes/components/EditRecipeComponent.js";
 
 const routes: RouteObject[] = [
   {
@@ -64,6 +65,11 @@ const routes: RouteObject[] = [
         path: "recipes/new",
         element: <AddRecipe />,
       },
+      {
+        path: "recipes/:id/edit",
+        element: <EditRecipe />,
+      },
+
       {
         path: "coupons/new",
         element: <AddCoupon />,

@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "../../../service/api";
 import { Recipe } from "../../../types/Recipe";
+import { EditRecipeRequest } from "../../../types/EditRecipeRequest";
+import { RecipeWithDetails } from "../../../types/RecipeWithDetails";
 
 interface RecipesState {
   recipes: Recipe[];
-  selectedRecipe: Recipe | null;
+  selectedRecipe: RecipeWithDetails | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -33,7 +35,7 @@ export const fetchRecipes = createAsyncThunk<
 });
 
 export const fetchRecipeById = createAsyncThunk<
-  Recipe,
+  RecipeWithDetails,
   string,
   { rejectValue: string }
 >("recipes/fetchRecipeById", async (id, { rejectWithValue }) => {
@@ -64,11 +66,11 @@ export const createRecipe = createAsyncThunk<
 
 export const updateRecipe = createAsyncThunk<
   Recipe,
-  { id: string; data: Partial<Recipe> },
+  { id: string; data: EditRecipeRequest },
   { rejectValue: string }
 >("/recipes/udateRecipe", async ({ id, data }, { rejectWithValue }) => {
   try {
-    const response = await axios.put(`/marketing/recipes?id=${id}`, data);
+    const response = await axios.post(`/marketing/recipes/update`, data);
     return response.data;
   } catch (err: any) {
     return rejectWithValue(
@@ -124,7 +126,7 @@ const recipesSlice = createSlice({
       })
       .addCase(
         fetchRecipeById.fulfilled,
-        (state, action: PayloadAction<Recipe>) => {
+        (state, action: PayloadAction<RecipeWithDetails>) => {
           state.status = "succeeded";
           state.selectedRecipe = action.payload;
         }
@@ -150,6 +152,9 @@ const recipesSlice = createSlice({
         state.error = action.payload || "Failed to create recipe";
       })
 
+      .addCase(updateRecipe.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(
         updateRecipe.fulfilled,
         (state, action: PayloadAction<Recipe>) => {
@@ -161,6 +166,10 @@ const recipesSlice = createSlice({
           }
         }
       )
+      .addCase(updateRecipe.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Error updating recipe";
+      })
 
       .addCase(
         deleteRecipe.fulfilled,

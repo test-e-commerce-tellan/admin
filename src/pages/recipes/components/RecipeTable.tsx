@@ -10,9 +10,14 @@ import {
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import ProgressIndicator from "../../../components/ProgressIndicator.tsx";
+import { FiEdit, FiTrash } from "react-icons/fi";
+import { IconButton } from "../../../components/Button.tsx";
+import { useNavigate } from "react-router-dom";
 
 const RecipeTable = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { recipes, status, error } = useAppSelector((state) => state.recipes);
   const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
 
@@ -42,6 +47,10 @@ const RecipeTable = () => {
     return <div className="p-4 text-red-500">Error: {error}</div>;
   }
 
+  const handleEdit = (id: string) => {
+    navigate(`/recipes/${id}/edit`);
+  };
+
   return (
     <div className="bg-white h-screen rounded">
       <DataTable
@@ -49,8 +58,8 @@ const RecipeTable = () => {
         dataKey="id"
         tableStyle={DataTableStyle}
         selection={selectedRecipes}
+        selectionMode="checkbox"
         size="small"
-        selectionMode="multiple"
         onSelectionChange={(e) => {
           const selected = Array.isArray(e.value) ? e.value : [e.value];
           setSelectedRecipes(selected);
@@ -73,6 +82,25 @@ const RecipeTable = () => {
         <Column
           field="short_description"
           header="Description"
+          headerStyle={TableHeaderStyle}
+        />
+        <Column
+          header="Actions"
+          body={(rowData: Recipe) => (
+            <div className="flex items-center space-x-3">
+              <IconButton
+                icon={<FiEdit />}
+                onClick={() => handleEdit(rowData.id)}
+                className="text-blue-600 hover:text-blue-800"
+              />
+
+              <IconButton
+                icon={<FiTrash />}
+                onClick={() => console.log("Delete clicked")}
+                className="text-red-600 hover:text-red-800"
+              />
+            </div>
+          )}
           headerStyle={TableHeaderStyle}
         />
       </DataTable>
