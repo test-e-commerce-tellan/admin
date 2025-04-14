@@ -72,7 +72,7 @@ export const updateRecipe = createAsyncThunk<
   Recipe,
   { id: string; data: EditRecipeRequest },
   { rejectValue: string }
->("/recipes/udateRecipe", async ({ id, data }, { rejectWithValue }) => {
+>("/recipes/udateRecipe", async ({data }, { rejectWithValue }) => {
   try {
     const response = await axios.post(`/marketing/recipes/update`, data);
     return response.data;
