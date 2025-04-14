@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
+  clearSelectedRecipe,
   fetchRecipeById,
   updateRecipe,
 } from "../../../store/features/recipe/recipeSlice";
@@ -106,6 +107,13 @@ const EditRecipeComponent = () => {
       console.error("Failed to update recipe:", err);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearSelectedRecipe());
+      dispatch(resetUploadState());
+    };
+  }, [dispatch]);
 
   const handleCancel = () => navigate(-1);
 
