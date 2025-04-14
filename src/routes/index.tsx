@@ -15,6 +15,7 @@ import AddCoupon from "../pages/coupons/AddCoupon";
 import Recipes from "../pages/recipes/Recipes";
 import AddRecipe from "../pages/recipes/AddRecipe";
 import EditRecipe from "../pages/recipes/EditRecipe";
+import PrivateRoute from "./PrivateRoute.js"
 
 const routes: RouteObject[] = [
   {
@@ -31,7 +32,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "/",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
