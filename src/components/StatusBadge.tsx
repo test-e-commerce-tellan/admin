@@ -8,7 +8,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   className = "bg-gray-500 text-white",
 }) => {
   return (
-    <span className={`px-2 py-1 rounded text-xs font-light ${className}`}>
+    <span className={`px-2 py-1 rounded text-xs font-semibold ${className}`}>
       {text}
     </span>
   );

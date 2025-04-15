@@ -1,40 +1,59 @@
 import { useEffect, useState } from "react";
-import { getAllOrders } from "../../../service/OrderService";
-import OrdersTableHeader from "./OrdersTableHeader";
-import { Order } from "../../../types/Order";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store.ts";
+import { fetchOrders } from "../../../store/features/orders/orderSlice.ts";
 import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
+import StatusBadge from "../../../components/StatusBadge";
+import OrdersTableHeader from "./OrdersTableHeader";
 import {
   DataTableStyle,
   TableHeaderStyle,
 } from "../../../constants/TableStyles";
+
+import { orderStatusColors } from "../../../constants/StatusColors";
 import {
-  orderStatusColors,
-  paymentStatusColors,
-} from "../../../constants/StatusColors";
-import StatusBadge from "../../../components/StatusBadge";
-import { DataTable } from "primereact/datatable";
+  Order,
+  OrderStatus,
+} from "../../../store/features/orders/orderTypes.ts";
+import { LoadingState } from "../../../types/LoadingStatus.ts";
+import LoadingPage from "../../../components/LoadingPage.tsx";
+import { DurationOption, getDateRange } from "../../../utils/dateUtils.ts";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
+import { Button } from "../../../components/ui/button.tsx";
 
 const OrdersTable = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  const { orders, status } = useSelector((state: RootState) => state.orders);
+
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [selectedOrders, setSelectedOrders] = useState<Order[]>([]);
+  const [selectedDuration] = useState<DurationOption>("this_month");
 
   const orderStatusOptions = [
     { label: "All", value: "All" },
-    { label: "Ready", value: "Ready" },
-    { label: "Shipped", value: "Shipped" },
-    { label: "Received", value: "Received" },
-    { label: "Cancelled", value: "Cancelled" },
+    ...Object.values(OrderStatus).map((status) => ({
+      label: status.charAt(0).toUpperCase() + status.slice(1),
+      value: status,
+    })),
   ];
 
   useEffect(() => {
-    getAllOrders().then((data) => {
-      setOrders(data);
-      setFilteredOrders(data);
-    });
-  }, []);
+    const { start_date, end_date } = getDateRange(selectedDuration);
+    dispatch(fetchOrders({ start_date, end_date }));
+  }, [dispatch, selectedDuration]);
+
+  useEffect(() => {
+    setFilteredOrders(orders);
+  }, [orders]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
@@ -47,10 +66,7 @@ const OrdersTable = () => {
 
     if (e.value === "All") {
       setSearchTerm("");
-      getAllOrders().then((data) => {
-        setOrders(data);
-        setFilteredOrders(data);
-      });
+      setFilteredOrders(orders);
     } else {
       filterOrders(searchTerm, e.value);
     }
@@ -59,45 +75,69 @@ const OrdersTable = () => {
   const filterOrders = (search: string, status: string | null) => {
     let filtered = orders.filter(
       (order) =>
-        order.orderNumber.toLowerCase().includes(search) ||
-        order.customerName.toLowerCase().includes(search)
+        order.order_id.toString().includes(search) ||
+        order.order_id.toString().includes(search)
     );
 
-    if (status) {
-      filtered = filtered.filter((order) => order.orderStatus === status);
+    if (status && status !== "All") {
+      filtered = filtered.filter((order) => order.status === status);
     }
 
     setFilteredOrders(filtered);
   };
 
-  const statusTemplate = (
-    rowData: Order,
-    statusField: "paymentStatus" | "orderStatus"
-  ) => {
-    const status = rowData[statusField];
-    const statusColors =
-      statusField === "paymentStatus" ? paymentStatusColors : orderStatusColors;
-    const colorClass = statusColors[status];
-
-    return <StatusBadge text={status} className={colorClass} />;
+  const statusTemplate = (rowData: Order) => {
+    const colorClass = orderStatusColors[rowData.status];
+    return <StatusBadge text={rowData.status} className={colorClass} />;
   };
 
-  const totalTemplate = (rowData: Order) => {
-    return <span>${rowData.total.toFixed(2)}</span>;
+  const handleEdit = (order: Order) => {
+    console.log("Edit order " + order.id);
   };
+
+  const handleDelete = (order: Order) => {
+    console.log("Delete order " + order.id);
+  };
+
+  const actionsTemplate = (order: Order) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-9 w-9 rounded-full"
+          aria-label="Actions"
+        >
+          <EllipsisVertical className="w-4 h-4" />
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" className="w-auto">
+        <DropdownMenuItem onClick={() => handleEdit(order)}>
+          <Pencil className="mr-2 h-4 w-4" /> Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleDelete(order)}>
+          <Trash2 className="mr-2 h-4 w-4 text-red-400" /> <span className="text-red-400">Delete</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  if (status == LoadingState.Loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="card">
       <DataTable
         value={filteredOrders}
-        dataKey="orderNumber"
+        dataKey="id"
         tableStyle={DataTableStyle}
         selection={selectedOrders}
         size="small"
-        selectionMode="multiple"
+        selectionMode="checkbox"
         onSelectionChange={(e) => {
-          const selected = Array.isArray(e.value) ? e.value : [e.value];
-          setSelectedOrders(selected);
+          setSelectedOrders(Array.isArray(e.value) ? e.value : []);
         }}
         paginator
         rows={10}
@@ -115,31 +155,58 @@ const OrdersTable = () => {
         }
       >
         <Column selectionMode="multiple" headerStyle={TableHeaderStyle} />
-        <Column field="date" header="Date" headerStyle={TableHeaderStyle} />
         <Column
-          field="customerName"
-          header="Customer Name"
+          header="Order ID"
+          body={(order: Order) => `MG${order.order_id}`}
           headerStyle={TableHeaderStyle}
+          className="font-bold text-xs"
         />
         <Column
-          field="paymentStatus"
-          header="Payment Status"
-          body={(rowData) => statusTemplate(rowData, "paymentStatus")}
+          header="Full Name"
+          body={(order: Order) => order.recipient.full_name}
           headerStyle={TableHeaderStyle}
-          bodyStyle={{ textAlign: "start" }}
+          className="text-xs"
+        />
+        <Column
+          field="address"
+          header="Address"
+          headerStyle={TableHeaderStyle}
+          className="text-xs"
         />
         <Column
           field="orderStatus"
-          header="Order Status"
-          body={(rowData) => statusTemplate(rowData, "orderStatus")}
+          header="Status"
+          body={(rowData) => statusTemplate(rowData)}
           headerStyle={TableHeaderStyle}
-          bodyStyle={{ textAlign: "start" }}
+          className="text-xs"
         />
         <Column
           field="total"
-          header="Total"
-          body={totalTemplate}
+          header="Total Cost"
+          body={(order: Order) => (
+            <span className="text-xs">KES {order.total_cost.toFixed(2)}</span>
+          )}
           headerStyle={TableHeaderStyle}
+          className="text-xs"
+        />
+        <Column
+          field="createdAt"
+          header="Created At"
+          body={(order: Order) =>
+            new Date(order.created_at).toLocaleDateString("en-KE", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          }
+          headerStyle={TableHeaderStyle}
+          className="text-xs"
+        />
+        <Column
+          body={actionsTemplate}
+          header="Actions"
+          headerStyle={TableHeaderStyle}
+          style={{ width: "4rem", textAlign: "center" }}
         />
       </DataTable>
     </div>

@@ -3,7 +3,8 @@ import authReducer from "./features/auth/authSlice";
 import couponsReducer from "./features/coupons/couponSlice";
 import recipeReducer from "./features/recipe/recipeSlice";
 import imageUploadReducer from "./features/uploads/uploadSlice";
-import productReducer from "./features/products/productSlice"
+import productReducer from "./features/products/productSlice";
+import orderReducer from "./features/orders/orderSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     coupons: couponsReducer,
     recipes: recipeReducer,
     uploads: imageUploadReducer,
-    products: productReducer
+    products: productReducer,
+    orders: orderReducer,
   },
   devTools: process.env.NODE_ENV != "production",
 });
