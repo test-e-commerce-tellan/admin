@@ -3,7 +3,7 @@ import { FaFacebook } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "../../store/hooks.ts";
-import { loginUser } from "../../store/features/auth/authSlice.ts";
+import { loginUser, resetStatus } from "../../store/features/auth/authSlice.ts";
 
 const LoginPage = () => {
   const [phone, setPhone] = useState("");
@@ -23,12 +23,15 @@ const LoginPage = () => {
     if (status === "succeeded" && user) {
       toast.success("Login successful");
       navigate("/");
+      dispatch(resetStatus());
     }
 
     if (status === "failed" && error) {
       toast.error(error);
+      dispatch(resetStatus());
     }
-  }, [status, user, error, navigate]);
+  }, [status, user, error, navigate, dispatch]);
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">

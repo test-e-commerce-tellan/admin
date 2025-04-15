@@ -32,14 +32,16 @@ export const loginUser = createAsyncThunk<
   }
 });
 
-
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
+      state.status = "idle";
+      state.error = null;
+    },
+    resetStatus(state) {
       state.status = "idle";
       state.error = null;
     },
@@ -61,5 +63,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, resetStatus } = authSlice.actions;
 export default authSlice.reducer;
