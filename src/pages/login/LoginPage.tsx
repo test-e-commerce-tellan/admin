@@ -12,7 +12,7 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { user, status, error } = useAppSelector((state) => state.auth);
+  const { token, status, error } = useAppSelector((state) => state.auth);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (status === "succeeded" && user) {
+    if (status === "succeeded" && token) {
       toast.success("Login successful");
       navigate("/");
       dispatch(resetStatus());
@@ -30,8 +30,7 @@ const LoginPage = () => {
       toast.error(error);
       dispatch(resetStatus());
     }
-  }, [status, user, error, navigate, dispatch]);
-  
+  }, [status, token, error, navigate, dispatch]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">

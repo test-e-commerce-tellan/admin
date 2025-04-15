@@ -11,11 +11,6 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
-    if (!token) {
-      window.location.href = "/login";
-      return Promise.reject(new Error("No token found"));
-    }
-
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
